@@ -1,5 +1,6 @@
 ﻿using ClosedXML.Excel;
 using System;
+using System.IO;
 using System.IO.Ports;
 
 namespace Program
@@ -39,6 +40,14 @@ namespace Program
             catch(ArgumentException)
             {
                 print("Имя порта не начинается с «COM» или тип файла порта не поддерживается.");
+            }
+            catch(IOException)
+            {
+                print("Не удалось задать порт. Возможно, вы в строку для порта записываете ОБЪЕКТ");
+            }
+            catch(InvalidOperationException)
+            {
+                print("Указанный порт на текущий экземпляр порта уже открыт.");
             }
             Console.ReadKey();
             workbook.SaveAs("C:\\Users\\User\\Desktop\\docs\\test.xlsx");
